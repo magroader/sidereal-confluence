@@ -43,10 +43,13 @@
                   <td><input type="number" name="players[<%= index %>][regret]" placeholder="Regret" value="<%= player.regret %>"></td>
                 </tr>
               <% }) %>
+              <tr class="add-player-row">
+              <td>
+                <button type="button" class="add-player" id="add-player">Add</button>
+              </td>
           </tbody>
         </table>
       </div>
-      <button type="button" id="add-player">Add Player</button>
       <button type="submit">Calculate Scores</button>
     </form>
   </div>

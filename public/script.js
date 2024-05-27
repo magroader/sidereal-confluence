@@ -16,8 +16,8 @@ function addPlayer(index) {
       <td><input type="number" name="players[${index}][ships]" placeholder="Ships"></td>
       <td><input type="number" name="players[${index}][regret]" placeholder="Regret"></td>
     `;
-
-    tbody.appendChild(newRow);    
+    
+    tbody.insertBefore(newRow, tbody.children[tbody.children.length-1]);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
