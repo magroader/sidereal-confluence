@@ -23,30 +23,33 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    overflow-x: auto;
   }
   
-  .player {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: auto;
   }
   
-  .player input {
-    flex: 1 1 100%;
+  th, td {
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
   }
   
-  .player span {
-    flex: 1 1 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #f0f0f0;
+  th {
+    position: sticky;
+    top: 0;
+    background: #f9f9f9;
+    z-index: 1;
+  }
+  
+  th:first-child, td:first-child {
+    position: sticky;
+    left: 0;
+    background: #f9f9f9;
+    z-index: 1;
   }
   
   button {
@@ -58,7 +61,7 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-top: 10px;
     font-size: 16px;
   }
   
@@ -70,4 +73,4 @@ body {
     .player input {
       flex: 1;
     }
-  }
+  }  
