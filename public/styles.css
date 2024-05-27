@@ -100,4 +100,17 @@ body, html {
     .player input {
       flex: 1;
     }
-  }  
+  } 
+
+  .delete-player {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .delete-player:hover {
+    background: #bd2130;
+  }
+  
