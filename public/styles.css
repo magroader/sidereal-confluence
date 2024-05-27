@@ -1,12 +1,19 @@
-body {
-    font-family: Arial, sans-serif;
+body, html {
+    height: 100%;
     margin: 0;
     padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
   }
   
   .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     max-width: 800px;
     margin: auto;
     padding: 20px;
@@ -23,33 +30,53 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .table-container {
+    flex: 1;
+    overflow: auto;
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
-    overflow: auto;
   }
   
   th, td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap;
   }
   
   th {
+    background: #f9f9f9;
     position: sticky;
     top: 0;
-    background: #f9f9f9;
-    z-index: 1;
+    z-index: 2;
   }
   
   th:first-child, td:first-child {
-    position: sticky;
     left: 0;
-    background: #f9f9f9;
+    position: sticky;
+    background: #fff;
     z-index: 1;
+  }
+  
+  th:nth-child(2), td:nth-child(2) {
+    left: 100px; /* Adjust this value based on your first column width */
+    position: sticky;
+    background: #fff;
+    z-index: 1;
+  }
+  
+  .final-score {
+    background: #f1f1f1;
+    font-weight: bold;
   }
   
   button {
