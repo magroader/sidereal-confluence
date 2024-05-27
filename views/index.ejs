@@ -28,24 +28,12 @@
             </tr>
           </thead>
           <tbody>
-            <% if (players.length === 0) { %>
-              <tr class="player">
-                <td><button type="button" class="delete-player" data-index="0">Delete</button></td>
-                <td><input type="text" name="players[0][name]" placeholder="Player Name" required></td>
-                <td><input type="number" name="players[0][victoryPoints]" placeholder="Victory Points"></td>
-                <td><input type="number" name="players[0][ultratech]" placeholder="Ultratech"></td>
-                <td><input type="number" name="players[0][largeCubes]" placeholder="Large Cubes"></td>
-                <td><input type="number" name="players[0][smallCubes]" placeholder="Small Cubes"></td>
-                <td><input type="number" name="players[0][ships]" placeholder="Ships"></td>
-                <td><input type="number" name="players[0][regret]" placeholder="Regret"></td>
-              </tr>
-            <% } else { %>
               <% players.forEach((player, index) => { %>
                 <tr class="player">
                   <td><button type="button" class="delete-player" data-index="<%= index %>">Delete</button></td>
                   <td><input type="text" name="players[<%= index %>][name]" placeholder="Player Name" value="<%= player.name %>" required></td>
                   <% if (player.score !== undefined) { %>
-                    <td class="final-score"><%= player.score %></td>
+                    <td class="final-score"> <%= player.score %> </td>
                   <% } %>
                   <td><input type="number" name="players[<%= index %>][victoryPoints]" placeholder="Victory Points" value="<%= player.victoryPoints %>"></td>
                   <td><input type="number" name="players[<%= index %>][ultratech]" placeholder="Ultratech" value="<%= player.ultratech %>"></td>
@@ -55,7 +43,6 @@
                   <td><input type="number" name="players[<%= index %>][regret]" placeholder="Regret" value="<%= player.regret %>"></td>
                 </tr>
               <% }) %>
-            <% } %>
           </tbody>
         </table>
       </div>
