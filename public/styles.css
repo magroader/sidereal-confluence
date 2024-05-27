@@ -1,121 +1,38 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  h1 {
-    color: #333;
-    text-align: center;
-  }
-  
-  form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: hidden;
-  }
-  
-  .table-container {
-    flex: 1;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse:collapse;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    white-space: nowrap;
-  }
-  
-  th {
-    background: #f9f9f9;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
-  
-  th:first-child, td:first-child {
-    left: 0;
-    position: sticky;
-    background: #fff;
-    z-index: 3;
-    padding-right: 0px;
-  }
-  
-  .final-score {
-    background: #f1f1f1;
-    font-weight: bold;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
-  @media (min-width: 600px) {
-    .player input {
-      flex: 1;
-    }
-  } 
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
 
-  .delete-player .add-player {
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    width: 66px;
-  }
+#app {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
 
-  .delete-player {
-    background: #dc3545;
-  }
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-  th:nth-child(2), td:nth-child(2) {
-    left: 76px; /* Needs to be total width of first column, which is the above button */
-    position: sticky;
-    background: #fff;
-    z-index: 3;
-    padding: 0px;
-  }
-  
-  .delete-player:hover {
-    background: #bd2130;
-  }
-  
+button {
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
