@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidereal Confluence Scorer</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Sidereal Confluence Scorer</h1>
+    <form action="/calculate-scores" method="POST" id="score-form">
+      <div id="players-container">
+        <% if (players.length === 0) { %>
+          <div class="player">
+            <input type="text" name="players[0][name]" placeholder="Player Name" required>
+            <input type="number" name="players[0][victoryPoints]" placeholder="Victory Points" required>
+            <input type="number" name="players[0][ultratech]" placeholder="Ultratech" required>
+            <input type="number" name="players[0][largeCubes]" placeholder="Large Cubes" required>
+            <input type="number" name="players[0][smallCubes]" placeholder="Small Cubes" required>
+            <input type="number" name="players[0][ships]" placeholder="Ships" required>
+          </div>
+        <% } else { %>
+          <% players.forEach((player, index) => { %>
+            <div class="player">
+              <input type="text" name="players[<%= index %>][name]" placeholder="Player Name" value="<%= player.name %>" required>
+              <input type="number" name="players[<%= index %>][victoryPoints]" placeholder="Victory Points" value="<%= player.victoryPoints %>" required>
+              <input type="number" name="players[<%= index %>][ultratech]" placeholder="Ultratech" value="<%= player.ultratech %>" required>
+              <input type="number" name="players[<%= index %>][largeCubes]" placeholder="Large Cubes" value="<%= player.largeCubes %>" required>
+              <input type="number" name="players[<%= index %>][smallCubes]" placeholder="Small Cubes" value="<%= player.smallCubes %>" required>
+              <input type="number" name="players[<%= index %>][ships]" placeholder="Ships" value="<%= player.ships %>" required>
+              <span>Score: <%= player.score %></span>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      <button type="button" id="add-player">Add Player</button>
+      <button type="submit">Calculate Scores</button>
+    </form>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
