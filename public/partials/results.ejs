@@ -1,5 +1,5 @@
 <h1>Results</h1>
-<% playerResources.sort((a, b) => b.resources - a.resources).forEach((player, index) => { %>
-    <p><%= index + 1 %>. <%= player.name %>: <%= player.resources %></p>
+<% playerData.sort((a, b) => b.score - a.score).forEach((player, index) => { %>
+    <p><%= index + 1 %>. <%= player.name %>: <%= player.score %></p>
 <% }); %>
 <button onclick="reset()">Start Over</button>

@@ -1,66 +1,67 @@
 const steps = [
     new EJS({url: "partials/player-count.ejs"}),
-    new EJS({url: "partials/player-names.ejs"}),
-    new EJS({url: "partials/player-resources.ejs"}),
+    new EJS({url: "partials/victory-points.ejs"}),
     new EJS({url: "partials/results.ejs"}),
 ];
 
 let currentStep = 0;
-let numberOfPlayers = 0;
-let playerNames = [];
-let playerResources = [];
+let playerData = [];
+
+function getScoreForPlayer(player) {
+    const vp = player.victoryPoints * 1;
+    const sp = player.ships * 2/12;
+    const scp = player.smallCubes * 2/12;
+    const lcp = player.largeCubes * 3/12;
+    const up = player.ultraTech * 6/12;
+    const rp = player.regret * -1;
+    return(isNaN(vp) ? 0 : vp)
+        + (isNaN(sp) ? 0 : sp)
+        + (isNaN(scp) ? 0 : scp)
+        + (isNaN(lcp) ? 0 : lcp)
+        + (isNaN(up) ? 0 : up)
+        + (isNaN(rp) ? 0 : rp);
+}
+
+function refreshScores() {
+    for (let i = 0; i < playerData.length; ++i)
+        playerData[i].score = getScoreForPlayer(playerData[i]);
+}
 
 function renderStep() {
+    refreshScores();
+
     const partial = steps[currentStep % steps.length];
-    const data = {numberOfPlayers, playerNames, playerResources};
+    const data = {playerData};
     content.innerHTML = partial.render(data);
 }
 
-function handlePlayerCount(count) {
+function setPlayerCount(count) {
     if (count >= 1 && count <= 9) {
-        numberOfPlayers = count;
-        ++currentStep;
-        renderStep();
+        for (let i = playerData.length ; i < count ; ++i)
+            playerData.push({name:"Player " + (playerData.length+1)});
+        playerData.slice(count);
     }
 }
 
-function handlePlayerNames() {
-    playerNames = [];
-    for (let i = 0; i < numberOfPlayers; i++) {
-        const playerNameInput = document.getElementById(`player-name-${i}`);
-        const playerName = playerNameInput.value.trim();
-        if (playerName) {
-            playerNames.push(playerName);
-        } else {
-            alert('Please enter all player names.');
-            return;
-        }
-    }
-    currentStep = 3;
+function next() {    
+    currentStep = (currentStep + 1) % steps.length;
     renderStep();
 }
 
-function handlePlayerResources() {
-    playerResources = [];
-    for (let i = 0; i < numberOfPlayers; i++) {
-        const resourceInput = document.getElementById(`player-resource-${i}`);
-        const resources = parseInt(resourceInput.value, 10);
-        if (!isNaN(resources)) {
-            playerResources.push({ name: playerNames[i], resources });
-        } else {
-            alert('Please enter valid resources for all players.');
-            return;
-        }
+function setVictoryPoints() {
+    for (let i = 0; i < playerData.length; ++i) {
+        const playerName = document.getElementById(`player-name-${i}`).value || "Player " + (i+1);
+        const resources = parseInt(document.getElementById(`player-resource-${i}`).value, 10);
+
+        let data = playerData[i];
+        data.name = playerName;
+        data.victoryPoints = !isNaN(resources) ? resources : 0;
     }
-    currentStep = 4;
-    renderStep();
 }
 
 function reset() {
-    currentStep = 1;
-    numberOfPlayers = 0;
-    playerNames = [];
-    playerResources = [];
+    currentStep = 0;
+    playerData = {};
     renderStep();
 }
 
