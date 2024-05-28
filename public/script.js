@@ -31,14 +31,11 @@ function renderStep() {
     app.innerHTML = partial.render({numberOfPlayers, playerNames, playerResources});
 }
 
-function handlePlayerCount() {
-    const playerCountInput = document.getElementById('player-count');
-    numberOfPlayers = parseInt(playerCountInput.value, 10);
-    if (numberOfPlayers > 0) {
-        currentStep = 2;
+function handlePlayerCount(count) {
+    if (count >= 1 && count <= 9) {
+        numberOfPlayers = count;
+        ++currentStep;
         renderStep();
-    } else {
-        alert('Please enter a valid number of players.');
     }
 }
 
