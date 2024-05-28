@@ -3,7 +3,7 @@ const playerNameTemplate = new EJS({url: "partials/player-names.ejs"});
 const playerResourcesTemplate = new EJS({url: "partials/player-resources.ejs"});
 const resultsTemplate = new EJS({url: "partials/results.ejs"});
 
-const app = document.getElementById('app');
+const content = document.getElementById('content');
 
 let currentStep = 1;
 let numberOfPlayers = 0;
@@ -28,7 +28,7 @@ function renderStep() {
             break;
     }
 
-    app.innerHTML = partial.render({numberOfPlayers, playerNames, playerResources});
+    content.innerHTML = partial.render({numberOfPlayers, playerNames, playerResources});
 }
 
 function handlePlayerCount(count) {
