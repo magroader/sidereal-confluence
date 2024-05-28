@@ -1,34 +1,19 @@
-const playerCountTemplate = new EJS({url: "partials/player-count.ejs"});
-const playerNameTemplate = new EJS({url: "partials/player-names.ejs"});
-const playerResourcesTemplate = new EJS({url: "partials/player-resources.ejs"});
-const resultsTemplate = new EJS({url: "partials/results.ejs"});
+const steps = [
+    new EJS({url: "partials/player-count.ejs"}),
+    new EJS({url: "partials/player-names.ejs"}),
+    new EJS({url: "partials/player-resources.ejs"}),
+    new EJS({url: "partials/results.ejs"}),
+];
 
-const content = document.getElementById('content');
-
-let currentStep = 1;
+let currentStep = 0;
 let numberOfPlayers = 0;
 let playerNames = [];
 let playerResources = [];
 
-
 function renderStep() {
-    let partial = '';
-    switch (currentStep) {
-        case 2:
-            partial = playerNameTemplate;
-            break;
-        case 3:
-            partial = playerResourcesTemplate;
-            break;
-        case 4:
-            partial = resultsTemplate;
-            break;
-        default:
-            partial = playerCountTemplate;
-            break;
-    }
-
-    content.innerHTML = partial.render({numberOfPlayers, playerNames, playerResources});
+    const partial = steps[currentStep % steps.length];
+    const data = {numberOfPlayers, playerNames, playerResources};
+    content.innerHTML = partial.render(data);
 }
 
 function handlePlayerCount(count) {
