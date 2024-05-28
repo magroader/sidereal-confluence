@@ -1,0 +1,5 @@
+<h1>Enter Player Names</h1>
+<% for(let i = 0; i < numberOfPlayers; i++) { %>
+    <input type="text" id="player-name-<%= i %>" placeholder="Player <%= i + 1 %> Name" />
+<% } %>
+<button onclick="handlePlayerNames()">Next</button>

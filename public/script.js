@@ -6,32 +6,35 @@ let playerNames = [];
 let playerResources = [];
 
 function renderStep() {
-    app.innerHTML = '';
+    let partial = '';
     switch (currentStep) {
         case 1:
-            renderPlayerCountStep();
+            partial = 'player-count';
             break;
         case 2:
-            renderPlayerNamesStep();
+            partial = 'player-names';
             break;
         case 3:
-            renderPlayerResourcesStep();
+            partial = 'player-resources';
             break;
         case 4:
-            renderResultsStep();
+            partial = 'results';
             break;
         default:
-            renderPlayerCountStep();
+            partial = 'player-count';
     }
-}
 
-function renderPlayerCountStep() {
-    const html = `
-        <h1>Enter Number of Players</h1>
-        <input type="number" id="player-count" min="2" max="10" />
-        <button onclick="handlePlayerCount()">Next</button>
-    `;
-    app.innerHTML = html;
+    const params = new URLSearchParams({
+        numberOfPlayers: numberOfPlayers,
+        playerNames: JSON.stringify(playerNames),
+        playerResources: JSON.stringify(playerResources)
+    });
+
+    fetch(`/partials/${partial}?${params.toString()}`)
+        .then(response => response.text())
+        .then(html => {
+            app.innerHTML = html;
+        });
 }
 
 function handlePlayerCount() {
@@ -43,15 +46,6 @@ function handlePlayerCount() {
     } else {
         alert('Please enter a valid number of players.');
     }
-}
-
-function renderPlayerNamesStep() {
-    let html = '<h1>Enter Player Names</h1>';
-    for (let i = 0; i < numberOfPlayers; i++) {
-        html += `<input type="text" id="player-name-${i}" placeholder="Player ${i + 1} Name" />`;
-    }
-    html += '<button onclick="handlePlayerNames()">Next</button>';
-    app.innerHTML = html;
 }
 
 function handlePlayerNames() {
@@ -70,16 +64,6 @@ function handlePlayerNames() {
     renderStep();
 }
 
-function renderPlayerResourcesStep() {
-    let html = '<h1>Enter Resources for Each Player</h1>';
-    playerNames.forEach((name, index) => {
-        html += `<h2>${name}</h2>`;
-        html += `<input type="number" id="player-resource-${index}" placeholder="Resource Count" />`;
-    });
-    html += '<button onclick="handlePlayerResources()">Calculate Scores</button>';
-    app.innerHTML = html;
-}
-
 function handlePlayerResources() {
     playerResources = [];
     for (let i = 0; i < numberOfPlayers; i++) {
@@ -94,16 +78,6 @@ function handlePlayerResources() {
     }
     currentStep = 4;
     renderStep();
-}
-
-function renderResultsStep() {
-    playerResources.sort((a, b) => b.resources - a.resources);
-    let html = '<h1>Results</h1>';
-    playerResources.forEach((player, index) => {
-        html += `<p>${index + 1}. ${player.name}: ${player.resources}</p>`;
-    });
-    html += '<button onclick="reset()">Start Over</button>';
-    app.innerHTML = html;
 }
 
 function reset() {
