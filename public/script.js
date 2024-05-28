@@ -1,3 +1,8 @@
+const playerCountTemplate = new EJS({url: "partials/player-count.ejs"});
+const playerNameTemplate = new EJS({url: "partials/player-names.ejs"});
+const playerResourcesTemplate = new EJS({url: "partials/player-resources.ejs"});
+const resultsTemplate = new EJS({url: "partials/results.ejs"});
+
 const app = document.getElementById('app');
 
 let currentStep = 1;
@@ -5,36 +10,25 @@ let numberOfPlayers = 0;
 let playerNames = [];
 let playerResources = [];
 
+
 function renderStep() {
     let partial = '';
     switch (currentStep) {
-        case 1:
-            partial = 'player-count';
-            break;
         case 2:
-            partial = 'player-names';
+            partial = playerNameTemplate;
             break;
         case 3:
-            partial = 'player-resources';
+            partial = playerResourcesTemplate;
             break;
         case 4:
-            partial = 'results';
+            partial = resultsTemplate;
             break;
         default:
-            partial = 'player-count';
+            partial = playerCountTemplate;
+            break;
     }
 
-    const params = new URLSearchParams({
-        numberOfPlayers: numberOfPlayers,
-        playerNames: JSON.stringify(playerNames),
-        playerResources: JSON.stringify(playerResources)
-    });
-
-    fetch(`/partials/${partial}?${params.toString()}`)
-        .then(response => response.text())
-        .then(html => {
-            app.innerHTML = html;
-        });
+    app.innerHTML = partial.render({numberOfPlayers, playerNames, playerResources});
 }
 
 function handlePlayerCount() {

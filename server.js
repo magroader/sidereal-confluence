@@ -15,15 +15,6 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-// Define routes for each partial
-app.get('/partials/:name', (req, res) => {
-    const name = req.params.name;
-    const numberOfPlayers = parseInt(req.query.numberOfPlayers, 10);
-    const playerNames = JSON.parse(req.query.playerNames || '[]');
-    const playerResources = JSON.parse(req.query.playerResources || '[]');
-    res.render(`partials/${name}`, { numberOfPlayers, playerNames, playerResources });
-});
-
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
