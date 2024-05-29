@@ -48,15 +48,19 @@ function next() {
     renderStep();
 }
 
-function setVictoryPoints() {
+function setResource(setPlayerDataFunc) {
     for (let i = 0; i < playerData.length; ++i) {
         const playerName = document.getElementById(`player-name-${i}`).value || "Player " + (i+1);
         const resources = parseInt(document.getElementById(`player-resource-${i}`).value, 10);
 
         let data = playerData[i];
         data.name = playerName;
-        data.victoryPoints = !isNaN(resources) ? resources : 0;
+        setPlayerDataFunc(data, !isNaN(resources) ? resources : 0);
     }
+}
+
+function setVictoryPoints() {
+    setResource(function(pd, val) { pd.victoryPoints = val;});
 }
 
 function reset() {
