@@ -16,12 +16,12 @@ body {
 }
 
 h1 {
-  justify-content: center;
-  display: flex;
+  text-align: center;
   font-size: 4vw;
 }
 
 h2 {
+  text-align: center;
   font-size: 3vw;
 }
 
@@ -45,8 +45,11 @@ h2 {
 
 input, button {
   width: 100%;
-  padding: 6px;
-  margin: 4px 0;
+  margin: 2px !important;
+}
+
+input {
+  --pico-line-height: 1;
 }
 
 #hwrapper {
