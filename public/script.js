@@ -1,5 +1,6 @@
 const steps = [
     new EJS({url: "partials/player-count.ejs"}),
+    new EJS({url: "partials/player-names.ejs"}),
     new EJS({url: "partials/victory-points.ejs"}),
     new EJS({url: "partials/ultra-tech.ejs"}),
     new EJS({url: "partials/large-cubes.ejs"}),
@@ -47,7 +48,7 @@ function renderStep() {
 function setPlayerCount(count) {
     if (count >= 1 && count <= 9) {
         for (let i = playerData.length ; i < count ; ++i)
-            playerData.push({name:"Player " + (playerData.length+1)});
+            playerData.push({});
         playerData.splice(count);
     }
 }
