@@ -38,6 +38,10 @@ function renderStep() {
     const partial = steps[currentStep % steps.length];
     const data = {playerData};
     content.innerHTML = partial.render(data);
+
+    const autofocusable = document.querySelectorAll("[autofocus]");
+    if (autofocusable.length > 0)
+        autofocusable[0].focus();
 }
 
 function setPlayerCount(count) {
