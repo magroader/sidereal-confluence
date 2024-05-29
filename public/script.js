@@ -1,6 +1,11 @@
 const steps = [
     new EJS({url: "partials/player-count.ejs"}),
     new EJS({url: "partials/victory-points.ejs"}),
+    new EJS({url: "partials/ultra-tech.ejs"}),
+    new EJS({url: "partials/large-cubes.ejs"}),
+    new EJS({url: "partials/small-cubes.ejs"}),
+    new EJS({url: "partials/ships.ejs"}),
+    new EJS({url: "partials/regret.ejs"}),
     new EJS({url: "partials/results.ejs"}),
 ];
 
@@ -61,6 +66,26 @@ function setResource(setPlayerDataFunc) {
 
 function setVictoryPoints() {
     setResource(function(pd, val) { pd.victoryPoints = val;});
+}
+
+function setUltraTech() {
+    setResource(function(pd, val) { pd.ultraTech = val;});
+}
+
+function setLargeCubes() {
+    setResource(function(pd, val) { pd.largeCubes = val;});
+}
+
+function setSmallCubes() {
+    setResource(function(pd, val) { pd.smallCubes = val;});
+}
+
+function setShips() {
+    setResource(function(pd, val) { pd.ships = val;});
+}
+
+function setRegret() {
+    setResource(function(pd, val) { pd.regret = val;});
 }
 
 function reset() {
