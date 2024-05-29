@@ -48,3 +48,7 @@ input, button {
   padding: 6px;
   margin: 4px 0;
 }
+
+#hwrapper {
+  display: flex;
+}
