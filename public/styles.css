@@ -55,3 +55,12 @@ input {
 #hwrapper {
   display: flex;
 }
+
+#player-score {
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
