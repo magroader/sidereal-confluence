@@ -5,4 +5,7 @@
         <input type="number" id="player-resource-<%= i %>" value="<%= playerData[i].ultraTech %>" placeholder="0" min="0" tabindex="<%= (i+1+playerData.length) %>"  />
     </div>
 <% } %>
-<button onclick="setUltraTech(); next();">Next</button>
+    <div id="hwrapper">
+        <button onclick="setNames(); setUltraTech(); prev();">Back</button>
+        <button onclick="setNames(); setUltraTech(); next();">Next</button>
+    </div>

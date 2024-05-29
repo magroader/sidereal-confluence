@@ -2,4 +2,7 @@
 <% playerData.sort((a, b) => b.score - a.score).forEach((player, index) => { %>
     <p><%= index + 1 %>. <%= player.name %>: <%= player.score %></p>
 <% }); %>
-<button onclick="reset()">Start Over</button>
+    <div id="hwrapper">
+        <button onclick="prev();">Back</button>
+        <button onclick="reset()">Start Over</button>
+    </div>

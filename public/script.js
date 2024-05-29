@@ -44,8 +44,13 @@ function setPlayerCount(count) {
     if (count >= 1 && count <= 9) {
         for (let i = playerData.length ; i < count ; ++i)
             playerData.push({name:"Player " + (playerData.length+1)});
-        playerData.slice(count);
+        playerData.splice(count);
     }
+}
+
+function prev() {    
+    currentStep = (currentStep + steps.length - 1) % steps.length;
+    renderStep();
 }
 
 function next() {    
@@ -53,14 +58,18 @@ function next() {
     renderStep();
 }
 
-function setResource(setPlayerDataFunc) {
+function setNames() {
     for (let i = 0; i < playerData.length; ++i) {
         const playerName = document.getElementById(`player-name-${i}`).value || "Player " + (i+1);
-        const resources = parseInt(document.getElementById(`player-resource-${i}`).value, 10);
+        if (playerName !== undefined)
+            playerData[i].name = playerName;
+    }
+}
 
-        let data = playerData[i];
-        data.name = playerName;
-        setPlayerDataFunc(data, !isNaN(resources) ? resources : 0);
+function setResource(setPlayerDataFunc) {
+    for (let i = 0; i < playerData.length; ++i) {
+        const resources = parseInt(document.getElementById(`player-resource-${i}`).value, 10);
+        setPlayerDataFunc(playerData[i], !isNaN(resources) ? resources : 0);
     }
 }
 
