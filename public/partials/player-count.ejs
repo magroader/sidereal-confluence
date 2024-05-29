@@ -1,5 +1,4 @@
 <h2>How many players?</h2>
-<button onclick="setPlayerCount(1); next();">1 Player</button>
-<% for(let i = 2; i <= 9; i++) { %>
-    <button onclick="setPlayerCount(<%= i %>); next();"><%= i %> Players</button>
+<% for(let i = 1; i <= 9; i++) { %>
+    <button onclick="setPlayerCount(<%= i %>); next();"><%= i %> Player<%= (i === 1 ? "" : "s") %></button>
 <% } %>
