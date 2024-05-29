@@ -61,7 +61,7 @@ function setVictoryPoints() {
 
 function reset() {
     currentStep = 0;
-    playerData = {};
+    playerData = [];
     renderStep();
 }
 
