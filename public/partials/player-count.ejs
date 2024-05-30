@@ -1,4 +1,4 @@
-<h2>How many players?</h2>
+<div id="page-title"><img src="images/star.png" alt="Base Game Star Icon"/><h2>How many players?</h2><img src="images/moon.png" alt="Bifurcation Expansion Moon Icon"/></div>
 <% for(let i = 1; i <= 9; i++) { %>
     <button onclick="setPlayerCount(<%= i %>); next();"><%= i %> Player<%= (i === 1 ? "" : "s") %></button>
 <% } %>

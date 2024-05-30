@@ -1,4 +1,4 @@
-<h1>Results</h1>
+<div id="page-title"><img src="images/victory-10.png" alt="10 Victory Points"/><h2>Results</h2><img src="images/victory-10.png" alt="10 Victory Points"/></div>
 <% playerData.sort((a, b) => b.score - a.score).forEach((player, index) => { %>
     <div id="player-score"><%= player.name %>: <%= player.score %></div>
 <% }); %>

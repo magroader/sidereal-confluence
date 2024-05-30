@@ -86,5 +86,6 @@ input {
 }
 
 #page-title h2 {
-  --pico-typography-spacing-vertical: 0px
+  --pico-typography-spacing-vertical: 0px;
+  padding: 2px 16px;
 }
