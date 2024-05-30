@@ -1,11 +1,2 @@
 <div id="page-title"><img src="images/ship.png" alt="Ship Icon"/><h2>Ships</h2><img src="images/ship.png" alt="Ship Icon"/></div>
-<% for(let i = 0; i < playerData.length; ++i) { %>
-    <div id="hwrapper">
-        <%= renderPlayerNameInput(i) %>
-        <%= renderResourceInput(i) %>
-    </div>
-<% } %>
-    <div id="hwrapper">
-        <button onclick="setNames(); setCurrentResource(); prev();">Back</button>
-        <button onclick="setNames(); setCurrentResource(); next();">Next</button>
-    </div>
+<%= renderPlayerAndResourceInputs() %>

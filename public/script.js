@@ -40,6 +40,7 @@ const stepEjs = steps.map(s => new EJS({url: "partials/" + s.name + ".ejs"}));
 
 const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
 const playerNameInputEjs = new EJS({url: "partials/player-name-input.ejs"});
+const playerAndResourceInputsEjs = new EJS({url: "partials/player-and-resource-input.ejs"});
 
 let currentStep = 0;
 let playerData = [];
@@ -129,6 +130,11 @@ function getInputEjsData(index) {
         playerCount : playerData.length,
         index : index,
     };
+}
+
+function renderPlayerAndResourceInputs() {
+    const data = { playerCount : playerData.length };
+    return playerAndResourceInputsEjs.render(data);
 }
 
 function renderResourceInput(index) {

@@ -1,0 +1,10 @@
+<% for(let i = 0; i < playerCount ; ++i) { %>
+    <div id="hwrapper">
+        <%= renderPlayerNameInput(i) %>
+        <%= renderResourceInput(i) %>
+    </div>
+<% } %>
+<div id="hwrapper">
+    <button onclick="setNames(); setCurrentResource(); prev();">Back</button>
+    <button onclick="setNames(); setCurrentResource(); next();">Next</button>
+</div>
