@@ -39,6 +39,7 @@ const RAW_DIVIDE_BY = 12;
 const stepEjs = steps.map(s => new EJS({url: "partials/" + s.name + ".ejs"}));
 
 const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
+const playerNameInputEjs = new EJS({url: "partials/player-name-input.ejs"});
 
 let currentStep = 0;
 let playerData = [];
@@ -122,13 +123,23 @@ function reset() {
     renderStep();
 }
 
-function renderResourceInput(index) {
-    const data = {
+function getInputEjsData(index) {
+    return {
         player : playerData[index],
         playerCount : playerData.length,
         index : index,
     };
+}
+
+function renderResourceInput(index) {
+    const data = getInputEjsData(index);
     return resourceInputEjs.render(data);
+}
+
+function renderPlayerNameInput(index, autofocus) {
+    let data = getInputEjsData(index);
+    data.autofocus = autofocus || false;
+    return playerNameInputEjs.render(data);
 }
 
 setStep(0);
