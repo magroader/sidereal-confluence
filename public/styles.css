@@ -22,7 +22,7 @@ h1 {
 
 h2 {
   text-align: center;
-  font-size: 3vw;
+  font-size: 3.5vw;
 }
 
 @media (min-width: 600px) {
@@ -30,7 +30,7 @@ h2 {
     font-size: 3vw;
   }
   h2 {
-    font-size: 2vw;
+    font-size: 2.5vw;
   }
 }
 
@@ -39,7 +39,7 @@ h2 {
     font-size: 2.5vw;
   }
   h2 {
-    font-size: 1.5vw;
+    font-size: 2vw;
   }
 }
 
@@ -63,4 +63,20 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#page-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-title img {
+  max-height: 50px;
+  padding: 6px;
+}
+
+#page-title h2 {
+  --pico-typography-spacing-vertical: 0px
 }
