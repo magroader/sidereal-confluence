@@ -1,33 +1,65 @@
 const steps = [
-    new EJS({url: "partials/player-count.ejs"}),
-    new EJS({url: "partials/player-names.ejs"}),
-    new EJS({url: "partials/victory-points.ejs"}),
-    new EJS({url: "partials/ultra-tech.ejs"}),
-    new EJS({url: "partials/large-cubes.ejs"}),
-    new EJS({url: "partials/small-cubes.ejs"}),
-    new EJS({url: "partials/ships.ejs"}),
-    new EJS({url: "partials/regret.ejs"}),
-    new EJS({url: "partials/results.ejs"}),
+    {
+        name : "player-count"
+    },
+    {
+        name : "player-names"
+    },
+    {
+        name : "victory-points",
+        rawValue : 12
+    },
+    {
+        name : "ultra-tech",
+        rawValue : 6
+    },
+    {
+        name : "large-cubes",
+        rawValue : 3
+    },
+    {
+        name : "small-cubes",
+        rawValue : 2
+    },
+    {
+        name : "ships",
+        rawValue : 2
+    },
+    {
+        name : "regret",
+        rawValue : -12
+    },
+    {
+        name : "results",
+    }
 ];
+
+const RAW_DIVIDE_BY = 12;
+
+const stepEjs = steps.map(s => new EJS({url: "partials/" + s.name + ".ejs"}));
 
 const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
 
 let currentStep = 0;
 let playerData = [];
+let currentResource = "";
 
 function getScoreForPlayer(player) {
-    const vp = player.victoryPoints * 1;
-    const sp = player.ships * 2/12;
-    const scp = player.smallCubes * 2/12;
-    const lcp = player.largeCubes * 3/12;
-    const up = player.ultraTech * 6/12;
-    const rp = player.regret * -1;
-    return(isNaN(vp) ? 0 : vp)
-        + (isNaN(sp) ? 0 : sp)
-        + (isNaN(scp) ? 0 : scp)
-        + (isNaN(lcp) ? 0 : lcp)
-        + (isNaN(up) ? 0 : up)
-        + (isNaN(rp) ? 0 : rp);
+    let totalRaw = 0;
+    for (let i = 0; i < steps.length ; ++i) {
+
+        let stepObj = steps[i];
+        let raw = stepObj.rawValue;
+        if (isNaN(raw))
+            continue;
+
+        let val = player[stepObj.name];
+        if (isNaN(val))
+            continue;
+
+        totalRaw += val * raw;
+    }
+    return totalRaw / RAW_DIVIDE_BY;
 }
 
 function refreshScores() {
@@ -38,7 +70,7 @@ function refreshScores() {
 function renderStep() {
     refreshScores();
 
-    const partial = steps[currentStep % steps.length];
+    const partial = stepEjs[currentStep % steps.length];
     const data = {playerData};
     content.innerHTML = partial.render(data);
 
@@ -55,14 +87,18 @@ function setPlayerCount(count) {
     }
 }
 
-function prev() {    
-    currentStep = (currentStep + steps.length - 1) % steps.length;
+function setStep(newStep) {
+    currentStep = newStep;
+    currentResource = steps[currentStep].name;
     renderStep();
 }
 
+function prev() {    
+    setStep((currentStep + steps.length - 1) % steps.length);
+}
+
 function next() {    
-    currentStep = (currentStep + 1) % steps.length;
-    renderStep();
+    setStep((currentStep + 1) % steps.length);
 }
 
 function setNames() {
@@ -73,35 +109,11 @@ function setNames() {
     }
 }
 
-function setResource(setPlayerDataFunc) {
+function setCurrentResource() {
     for (let i = 0; i < playerData.length; ++i) {
         const resources = parseInt(document.getElementById(`player-resource-${i}`).value, 10);
-        setPlayerDataFunc(playerData[i], !isNaN(resources) ? resources : 0);
+        playerData[i][currentResource] = !isNaN(resources) ? resources : 0;
     }
-}
-
-function setVictoryPoints() {
-    setResource(function(pd, val) { pd.victoryPoints = val;});
-}
-
-function setUltraTech() {
-    setResource(function(pd, val) { pd.ultraTech = val;});
-}
-
-function setLargeCubes() {
-    setResource(function(pd, val) { pd.largeCubes = val;});
-}
-
-function setSmallCubes() {
-    setResource(function(pd, val) { pd.smallCubes = val;});
-}
-
-function setShips() {
-    setResource(function(pd, val) { pd.ships = val;});
-}
-
-function setRegret() {
-    setResource(function(pd, val) { pd.regret = val;});
 }
 
 function reset() {
@@ -119,5 +131,4 @@ function renderResourceInput(index) {
     return resourceInputEjs.render(data);
 }
 
-// Initialize the app
-renderStep();
+setStep(0);
