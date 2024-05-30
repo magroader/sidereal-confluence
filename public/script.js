@@ -1,37 +1,13 @@
 const steps = [
-    {
-        name : "player-count"
-    },
-    {
-        name : "player-names"
-    },
-    {
-        name : "ships",
-        rawValue : 2
-    },
-    {
-        name : "small-cubes",
-        rawValue : 2
-    },
-    {
-        name : "large-cubes",
-        rawValue : 3
-    },
-    {
-        name : "ultra-tech",
-        rawValue : 6
-    },
-    {
-        name : "victory-points",
-        rawValue : 12
-    },
-    {
-        name : "regret",
-        rawValue : -12
-    },
-    {
-        name : "results",
-    }
+    { name : "player-count" },
+    { name : "player-names" },
+    { name : "ships", rawValue : 2 },
+    { name : "small-cubes", rawValue : 2 },
+    { name : "large-cubes", rawValue : 3 },
+    { name : "ultra-tech", rawValue : 6 },
+    { name : "victory-points", rawValue : 12 },
+    { name : "regret", rawValue : -12 },
+    { name : "results", }
 ];
 
 const RAW_DIVIDE_BY = 12;
