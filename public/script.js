@@ -6,24 +6,24 @@ const steps = [
         name : "player-names"
     },
     {
-        name : "victory-points",
-        rawValue : 12
-    },
-    {
-        name : "ultra-tech",
-        rawValue : 6
-    },
-    {
-        name : "large-cubes",
-        rawValue : 3
+        name : "ships",
+        rawValue : 2
     },
     {
         name : "small-cubes",
         rawValue : 2
     },
     {
-        name : "ships",
-        rawValue : 2
+        name : "large-cubes",
+        rawValue : 3
+    },
+    {
+        name : "ultra-tech",
+        rawValue : 6
+    },
+    {
+        name : "victory-points",
+        rawValue : 12
     },
     {
         name : "regret",
