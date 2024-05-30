@@ -77,6 +77,14 @@ input {
   padding: 6px;
 }
 
+#minpad-right {
+  padding-right: 1px !important;
+}
+
+#minpad-left {
+  padding-left: 1px !important;
+}
+
 #page-title h2 {
   --pico-typography-spacing-vertical: 0px
 }
