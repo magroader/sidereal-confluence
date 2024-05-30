@@ -2,7 +2,7 @@
 <% for(let i = 0; i < playerData.length; ++i) { %>
     <div id="hwrapper">
         <input type="text" id="player-name-<%= i %>" value="<%= playerData[i].name %>" placeholder="Player <%= i + 1 %> Name" tabindex="<%= (i+1) %>" />
-        <input type="number" id="player-resource-<%= i %>" value="<%= playerData[i].ships %>" placeholder="0" min="0" tabindex="<%= (i+1+playerData.length) %>"  <% if (i===0) { %> autofocus <% } %>  />
+        <%= renderResourceInput(i) %>
     </div>
 <% } %>
     <div id="hwrapper">

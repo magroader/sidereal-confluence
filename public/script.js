@@ -10,6 +10,8 @@ const steps = [
     new EJS({url: "partials/results.ejs"}),
 ];
 
+const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
+
 let currentStep = 0;
 let playerData = [];
 
@@ -106,6 +108,15 @@ function reset() {
     currentStep = 0;
     playerData = [];
     renderStep();
+}
+
+function renderResourceInput(index) {
+    const data = {
+        player : playerData[index],
+        playerCount : playerData.length,
+        index : index,
+    };
+    return resourceInputEjs.render(data);
 }
 
 // Initialize the app
