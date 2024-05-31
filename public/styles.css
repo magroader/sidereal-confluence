@@ -43,6 +43,15 @@ h2 {
   }
 }
 
+@media (min-width: 1800px) {
+  h1 {
+    font-size: 1.8vw;
+  }
+  h2 {
+    font-size: 1.5vw;
+  }
+}
+
 input, button {
   width: 100%;
   margin: 2px !important;
