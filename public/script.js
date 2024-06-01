@@ -1,5 +1,6 @@
 let currentStep = 0;
 let playerData = [];
+let sortedPlayerData = [];
 let scoreData = { gcd: 1 };
 let currentResource = "";
 
@@ -53,6 +54,8 @@ function refreshScores() {
         if (player.quotient < 0 && player.dividend < 0)
             player.dividend = -player.dividend;
     }
+
+    sortedPlayerData = [...playerData].sort((a, b) => b.rawScore - a.rawScore);
 }
 
 function renderStep() {
