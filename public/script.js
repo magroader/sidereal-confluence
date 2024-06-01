@@ -73,6 +73,9 @@ function setNames() {
 }
 
 function setCurrentResource() {
+    if (currentResource === undefined)
+        return;
+
     for (let i = 0; i < playerData.length; ++i) {
         const resources = parseInt(document.getElementById(`player-resource-${i}`).value, 10);
         playerData[i][currentResource] = !isNaN(resources) ? resources : 0;
