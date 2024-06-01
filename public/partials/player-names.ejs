@@ -1,8 +1,6 @@
 <div id="page-title"><img src="images/colony.png" alt="Colony Icon"/><h2>Player Names</h2><img src="images/technology.png" alt="Technology Icon"/></div>
 <% for(let i = 0; i < playerData.length; ++i) { %>
-    <div id="hwrapper">
-        <%= renderPlayerNameInput(i, true) %>
-    </div>
+    <%= renderPlayerNameInput(i, true) %>
 <% } %>
 <div id="hwrapper">
     <button onclick="setNames(); prev();">Back</button>

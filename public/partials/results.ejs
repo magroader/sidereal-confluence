@@ -1,14 +1,18 @@
 <div id="page-title"><img src="images/victory-10.png" alt="10 Victory Points"/><h2>Results</h2><img src="images/victory-10.png" alt="10 Victory Points"/></div>
 <% playerData.sort((a, b) => b.rawScore - a.rawScore).forEach((player, index) => { %>
-    <div id="player-score"><%= player.name %>: <% 
-        if (player.dividend === 0) { 
-            %> <%= player.quotient %> <%
-        } else { 
-            if (player.quotient !== 0) { 
-                %> <%= player.quotient %> <% 
-            } 
-            %><%= player.dividend %>&frasl;<%= scoreData.divisor %><%
-        } %>
+    <div id="player-score">
+        <div id="hwrapper">
+            <div><h3><%= player.name %></h3></div>
+            <div><h3>&nbsp;&nbsp;:&nbsp;&nbsp;</h3></div>
+            <div><h3><% if (player.dividend === 0) { 
+                %> <%= player.quotient %> <%
+            } else { 
+                if (player.quotient !== 0) { 
+                    %> <%= player.quotient %> <% 
+                } 
+                %><%= player.dividend %>&frasl;<%= scoreData.divisor %><%
+            } %></h3></div>
+        </div>
     </div>
 <% }); %>
 <div id="hwrapper">
