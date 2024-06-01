@@ -2,16 +2,16 @@
 <% playerData.sort((a, b) => b.rawScore - a.rawScore).forEach((player, index) => { %>
     <div id="player-score">
         <div id="hwrapper">
-            <div><h3><%= player.name %></h3></div>
-            <div><h3>&nbsp;&nbsp;:&nbsp;&nbsp;</h3></div>
-            <div><h3><% if (player.dividend === 0) { 
+            <div><h4><%= player.name %></h4></div>
+            <div><h4>&nbsp;&nbsp;:&nbsp;&nbsp;</h4></div>
+            <div><h4><% if (player.dividend === 0) { 
                 %> <%= player.quotient %> <%
             } else { 
                 if (player.quotient !== 0) { 
                     %> <%= player.quotient %> <% 
                 } 
                 %><%= player.dividend %>&frasl;<%= scoreData.divisor %><%
-            } %></h3></div>
+            } %></h4></div>
         </div>
     </div>
 <% }); %>
