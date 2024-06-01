@@ -1,23 +1,3 @@
-const steps = [
-    { name : "player-count" },
-    { name : "player-names" },
-    { name : "ships", rawValue : 2 },
-    { name : "small-cubes", rawValue : 2 },
-    { name : "large-cubes", rawValue : 3 },
-    { name : "ultra-tech", rawValue : 6 },
-    { name : "victory-points", rawValue : 12 },
-    { name : "regret", rawValue : -12 },
-    { name : "results", }
-];
-
-const RAW_DIVIDE_BY = 12;
-
-const stepEjs = steps.map(s => new EJS({url: "partials/" + s.name + ".ejs"}));
-
-const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
-const playerNameInputEjs = new EJS({url: "partials/player-name-input.ejs"});
-const playerAndResourceInputsEjs = new EJS({url: "partials/player-and-resource-input.ejs"});
-
 let currentStep = 0;
 let playerData = [];
 let currentResource = "";
@@ -46,8 +26,6 @@ function refreshScores() {
 }
 
 function renderStep() {
-    refreshScores();
-
     const partial = stepEjs[currentStep % steps.length];
     const data = {playerData};
     content.innerHTML = partial.render(data);
@@ -67,7 +45,14 @@ function setPlayerCount(count) {
 
 function setStep(newStep) {
     currentStep = newStep;
-    currentResource = steps[currentStep].name;
+
+    const stepObj = steps[currentStep];
+
+    currentResource = isNaN(stepObj.rawValue) ? undefined : stepObj.name;
+
+    if (stepObj.preCall)
+        stepObj.preCall();
+
     renderStep();
 }
 
@@ -123,5 +108,25 @@ function renderPlayerNameInput(index, autofocus) {
     data.autofocus = autofocus || false;
     return playerNameInputEjs.render(data);
 }
+
+const RAW_DIVIDE_BY = 12;
+
+const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
+const playerNameInputEjs = new EJS({url: "partials/player-name-input.ejs"});
+const playerAndResourceInputsEjs = new EJS({url: "partials/player-and-resource-input.ejs"});
+
+const steps = [
+    { name : "player-count" },
+    { name : "player-names" },
+    { name : "ships", rawValue : 2 },
+    { name : "small-cubes", rawValue : 2 },
+    { name : "large-cubes", rawValue : 3 },
+    { name : "ultra-tech", rawValue : 6 },
+    { name : "victory-points", rawValue : 12 },
+    { name : "regret", rawValue : -12 },
+    { name : "results", preCall : refreshScores }
+];
+
+const stepEjs = steps.map(s => new EJS({url: "partials/" + s.name + ".ejs"}));
 
 setStep(0);
