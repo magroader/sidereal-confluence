@@ -2,27 +2,30 @@ let currentStep = 0;
 let playerData = [];
 let currentResource = "";
 
-function getScoreForPlayer(player) {
-    let totalRaw = 0;
-    for (let i = 0; i < steps.length ; ++i) {
+function getRawScoreForStep(player, step) {
+    let raw = step.rawMultiplier;
+    if (isNaN(raw))
+        return 0;
 
-        let stepObj = steps[i];
-        let raw = stepObj.rawValue;
-        if (isNaN(raw))
-            continue;
+    let val = player[step.name];
+    if (isNaN(val))
+        return 0;
 
-        let val = player[stepObj.name];
-        if (isNaN(val))
-            continue;
-
-        totalRaw += val * raw;
-    }
-    return totalRaw / RAW_DIVIDE_BY;
+    return val * raw;
 }
+
+function getRawScoreForPlayer(player) {
+    let totalRaw = 0;
+    for (let i = 0; i < steps.length ; ++i)
+        totalRaw += getRawScoreForStep(player, steps[i])
+    return totalRaw;
+}
+
+
 
 function refreshScores() {
     for (let i = 0; i < playerData.length; ++i)
-        playerData[i].score = getScoreForPlayer(playerData[i]);
+        playerData[i].rawScore = getRawScoreForPlayer(playerData[i]);
 }
 
 function renderStep() {
@@ -48,7 +51,7 @@ function setStep(newStep) {
 
     const stepObj = steps[currentStep];
 
-    currentResource = isNaN(stepObj.rawValue) ? undefined : stepObj.name;
+    currentResource = isNaN(stepObj.rawMultiplier) ? undefined : stepObj.name;
 
     if (stepObj.preCall)
         stepObj.preCall();
@@ -121,12 +124,12 @@ const playerAndResourceInputsEjs = new EJS({url: "partials/player-and-resource-i
 const steps = [
     { name : "player-count" },
     { name : "player-names" },
-    { name : "ships", rawValue : 2 },
-    { name : "small-cubes", rawValue : 2 },
-    { name : "large-cubes", rawValue : 3 },
-    { name : "ultra-tech", rawValue : 6 },
-    { name : "victory-points", rawValue : 12 },
-    { name : "regret", rawValue : -12 },
+    { name : "ships", rawMultiplier: 2 },
+    { name : "small-cubes", rawMultiplier : 2 },
+    { name : "large-cubes", rawMultiplier : 3 },
+    { name : "ultra-tech", rawMultiplier : 6 },
+    { name : "victory-points", rawMultiplier : 12 },
+    { name : "regret", rawMultiplier : -12 },
     { name : "results", preCall : refreshScores }
 ];
 
