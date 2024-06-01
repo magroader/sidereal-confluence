@@ -1,5 +1,6 @@
 let currentStep = 0;
 let playerData = [];
+let scoreData = { gcd: 1 };
 let currentResource = "";
 
 function getRawScoreForStep(player, step) {
@@ -21,11 +22,33 @@ function getRawScoreForPlayer(player) {
     return totalRaw;
 }
 
+function isValidGcd(candidateGcd, rawScores) {
+    return rawScores.every(val => (val % candidateGcd) == 0);
+}
 
+function calculateGcd(rawScores) {
+    for (let i = 0 ; i < GCD_CANDIDATES.length ; ++i)
+        if (isValidGcd(GCD_CANDIDATES[i], rawScores))
+            return GCD_CANDIDATES[i];
+    return 1;
+}
 
 function refreshScores() {
     for (let i = 0; i < playerData.length; ++i)
         playerData[i].rawScore = getRawScoreForPlayer(playerData[i]);
+    
+    const MAX_GCD = GCD_CANDIDATES[0];
+
+    const gcd = calculateGcd(playerData.map(pd => pd.rawScore));
+    scoreData.divisor = MAX_GCD / gcd;
+
+    for (let i = 0; i < playerData.length; ++i) {
+        const player = playerData[i];
+        const rawQuotient = (player.rawScore - (player.rawScore % MAX_GCD));
+        const rawRemainder = player.rawScore % MAX_GCD;
+        player.quotient = rawQuotient / MAX_GCD;
+        player.dividend = rawRemainder / gcd;
+    }
 }
 
 function renderStep() {
@@ -115,7 +138,7 @@ function renderPlayerNameInput(index, autofocus) {
     return playerNameInputEjs.render(data);
 }
 
-const RAW_DIVIDE_BY = 12;
+const GCD_CANDIDATES = [12, 6, 4, 3, 2];
 
 const resourceInputEjs = new EJS({url: "partials/resource-input.ejs"});
 const playerNameInputEjs = new EJS({url: "partials/player-name-input.ejs"});
