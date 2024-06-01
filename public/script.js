@@ -48,6 +48,10 @@ function refreshScores() {
         const rawRemainder = player.rawScore % MAX_GCD;
         player.quotient = rawQuotient / MAX_GCD;
         player.dividend = rawRemainder / gcd;
+
+        // Having negative values for both values would display the negative in both slots, so flip the dividend
+        if (player.quotient < 0 && player.dividend < 0)
+            player.dividend = -player.dividend;
     }
 }
 
