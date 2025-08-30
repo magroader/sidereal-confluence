@@ -80,6 +80,7 @@ input {
   justify-content: center;
   align-items: center;
   height: 56px;
+  padding: 0px 0px 16px 0px;
 }
 
 #page-title img {
