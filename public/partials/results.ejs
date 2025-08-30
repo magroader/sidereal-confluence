@@ -4,7 +4,7 @@
         <div id="hwrapper">
             <div><h4><%= player.name %></h4></div>
             <div><h4>&nbsp;&nbsp;:&nbsp;&nbsp;</h4></div>
-            <div><h4><% if (scoreData.divisor === 0) { 
+            <div><h4><% if (scoreData.divisor === 1) { 
                 %> <%= player.quotient %> <%
             } else { 
                 if (player.quotient !== 0) { 
